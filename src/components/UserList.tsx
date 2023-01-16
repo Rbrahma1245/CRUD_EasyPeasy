@@ -1,5 +1,6 @@
 import React from 'react'
 import { useStoreState } from "easy-peasy";
+import { Iuser } from '../screens/Homepage';
 
 
 
@@ -11,7 +12,7 @@ interface props {
 
 
 
-const Display: React.FC<props> = ({ handleDelete, handleEdit }) => {
+const UserList: React.FC<props> = ({ handleDelete, handleEdit }) => {
 
     const userList = useStoreState((state: any) => state.userList)
 
@@ -20,9 +21,8 @@ const Display: React.FC<props> = ({ handleDelete, handleEdit }) => {
     return (
         <div >
             DISPLAY PAGE
-
             {
-                userList.map((user: any) => {
+                userList.map((user: Iuser) => {
                     // console.log(currElem)
                     return (
                         <div className='  grid grid-cols-2 h-32 text-left  bg-pink-200 rounded  mt-2 ml-2' key={user.id}>
@@ -36,9 +36,9 @@ const Display: React.FC<props> = ({ handleDelete, handleEdit }) => {
 
                             <div className='  flex justify-end  text-center'>
                                 <button className=" bg-sky-600 hover:bg-sky-700 py-2 px-4 h-12 rounded mt-5 mr-4"
-                                    onClick={() => handleEdit(user.id)}>  Edit  </button>
+                                    onClick={() => handleEdit(user.id!)}>  Edit  </button>
                                 <button className=" bg-rose-400 hover:bg-rose-500 py-2 px-4 h-12  rounded  mt-5 mr-4"
-                                    onClick={() => handleDelete(user.id)} >   Delete  </button>
+                                    onClick={() => handleDelete(user.id!)} >   Delete  </button>
                             </div>
                         </div>
                     )
@@ -51,4 +51,4 @@ const Display: React.FC<props> = ({ handleDelete, handleEdit }) => {
     )
 }
 
-export default Display
+export default UserList

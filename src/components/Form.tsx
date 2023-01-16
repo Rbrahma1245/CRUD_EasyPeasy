@@ -23,14 +23,9 @@ interface props {
 
 const Form: React.FC<props> = ({ user, setUser, handleSubmit }) => {
 
-
-
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value })
     }
-
-
 
 
 

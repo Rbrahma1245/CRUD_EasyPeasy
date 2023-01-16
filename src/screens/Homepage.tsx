@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Card from '../components/Display'
+import UserList from '../components/UserList'
 import Form from '../components/Form'
 import '../styles/output.css'
 import { useStoreActions } from "easy-peasy";
@@ -26,12 +26,16 @@ const Homepage: React.FC = () => {
     });
 
 
+    const { AddUser, DeleteUser, UpdateUser } = useStoreActions((actions: any) => ({
+        AddUser: actions.AddUser,
+        DeleteUser: actions.DeleteUser,
+        UpdateUser: actions.UpdateUser
+    }));
 
-    const addUser = useStoreActions((actions: any) => actions.addUser);
-    const deleteUser = useStoreActions((actions: any) => actions.deleteUser);
-    const updateUser = useStoreActions((actions: any) => actions.updateUser);
 
     const userList = useStoreState((state: any) => state.userList)
+
+    console.log(userList)
 
 
 
@@ -42,7 +46,7 @@ const Homepage: React.FC = () => {
             alert("Please fill the details");
         }
         else if (user.id) {
-            updateUser(user);
+            UpdateUser(user);
             setUser({
                 name: '',
                 age: 0,
@@ -51,7 +55,7 @@ const Homepage: React.FC = () => {
         }
 
         else {
-            addUser({ ...user, id: Date.now() });
+            AddUser({ ...user, id: Date.now() });
             setUser({
                 name: '',
                 age: 0,
@@ -63,18 +67,19 @@ const Homepage: React.FC = () => {
 
 
     const handleDelete = (id: number) => {
-        let deletedUserList = userList.filter((CurrElem: any) => {
+        let deletedUserList = userList.filter((CurrElem: Iuser) => {
             return (CurrElem.id !== id)
         })
-        deleteUser(deletedUserList)
+        DeleteUser(deletedUserList)
     }
 
 
     const handleEdit = (id: number) => {
 
-        let updateValue = userList.find((CurrElem: any) => {
+        let updateValue = userList.find((CurrElem: Iuser) => {
             return CurrElem.id === id
         })
+        console.log(updateValue)
         if (updateValue) setUser(updateValue);
     }
 
@@ -97,7 +102,7 @@ const Homepage: React.FC = () => {
         <div className='bg-pink-50  border-2  h-full '>
 
             <div className=' text-center grid grid-cols-2 w-2/3  justify - between ml-10   mt-8'>
-                < Card {...cardArgs}  />
+                < UserList {...cardArgs} />
                 <Form {...formArgs} />
             </div >
         </div >

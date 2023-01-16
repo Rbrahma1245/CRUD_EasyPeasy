@@ -1,11 +1,11 @@
 import React from 'react'
 import { Form } from 'react-router-dom'
-import Display from '../../components/Display'
+import Display from '../../components/UserList'
 
 const HomePage = () => {
 
 
-  
+
 
 
     return (

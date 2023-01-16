@@ -1,34 +1,29 @@
-
 import { action } from "easy-peasy";
+import { Iuser } from "../screens/Homepage";
 
 
 
 export default {
-
     userList: [],
-
 
 
 
     // ACTIONS
 
-    addUser: action((state: any, user) => {
-        // console.log(user)
+    AddUser: action((state: any, user: Iuser) => {
         state.userList.push(user);
     }),
 
-    deleteUser: action((state: any, user) => {
+    DeleteUser: action((state: any, user: Iuser) => {
         state.userList = user
     }),
 
-
-    updateUser: action((state: any, user) => {
-
-        let updatedValue = state.userList.map((elem: any) => {
-            if (elem.id === user.id) {
-                elem = user;
+    UpdateUser: action((state: any, user: Iuser) => {
+        let updatedValue = state.userList.map((userList: Iuser) => {
+            if (userList.id === user.id) {
+                userList = user;
             }
-            return elem
+            return userList
         })
         state.userList = updatedValue
     }),
