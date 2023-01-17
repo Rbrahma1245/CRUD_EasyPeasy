@@ -1,8 +1,7 @@
 import React from 'react'
 import { useStoreState } from "easy-peasy";
 import { Iuser } from '../screens/Homepage';
-
-
+import { IState } from '../models/Models';
 
 
 interface props {
@@ -11,12 +10,9 @@ interface props {
 }
 
 
-
 const UserList: React.FC<props> = ({ handleDelete, handleEdit }) => {
 
-    const userList = useStoreState((state: any) => state.userList)
-
-
+    const userList = useStoreState((state: IState) => state.userList)
 
     return (
         <div >
@@ -44,9 +40,6 @@ const UserList: React.FC<props> = ({ handleDelete, handleEdit }) => {
                     )
                 })
             }
-
-
-
         </div>
     )
 }

@@ -2,24 +2,11 @@ import React, { useState } from 'react'
 import { Iuser } from '../screens/Homepage';
 
 
-
-
-export interface userInput {
-    name: string;
-    age: string;
-    gender: string;
-    id?: number;
-}
-
-
-
 interface props {
     user: Iuser
     setUser: React.Dispatch<React.SetStateAction<Iuser>>
     handleSubmit: (e: React.FormEvent) => void
 }
-
-
 
 const Form: React.FC<props> = ({ user, setUser, handleSubmit }) => {
 
@@ -30,7 +17,6 @@ const Form: React.FC<props> = ({ user, setUser, handleSubmit }) => {
 
 
     return (
-
         <div className='border-2 ml-10 text-center rounded bg-blue-100 h-80'>
             USER FORM
 
@@ -46,7 +32,6 @@ const Form: React.FC<props> = ({ user, setUser, handleSubmit }) => {
                     <input className='ml-2' type="radio" value="Female" name="gender" checked={user.gender === "Female"} onChange={handleChange} /> Female
                     <input className='ml-2' type="radio" value="Other" name="gender" checked={user.gender === "Other"} onChange={handleChange} /> Other
                 </div>
-
                 {
                     user.id ? <button className=" bg-sky-600 hover:bg-sky-700 py-2 px-4 w-32 rounded mt-2 ml-2" onClick={handleSubmit} > Update </button> :
                         <button className="bg-green-400  active:hover-bg-yellow py-2 px-4 w-32 rounded mt-2 ml-2" onClick={handleSubmit} > SUBMIT </button>

@@ -1,24 +1,27 @@
 import { action } from "easy-peasy";
 import { Iuser } from "../screens/Homepage";
 
+export interface IState {
+    userList: Iuser[];
+}
 
 
 export default {
     userList: [],
 
 
-
     // ACTIONS
 
-    AddUser: action((state: any, user: Iuser) => {
+    AddUser: action<IState, Iuser>((state, user) => {
         state.userList.push(user);
     }),
 
-    DeleteUser: action((state: any, user: Iuser) => {
-        state.userList = user
+    DeleteUser: action<IState, number>((state, userId) => {
+        state.userList = state.userList.filter((userItem: Iuser) => userItem.id !== userId)
+
     }),
 
-    UpdateUser: action((state: any, user: Iuser) => {
+    UpdateUser: action<IState, Iuser>((state, user) => {
         let updatedValue = state.userList.map((userList: Iuser) => {
             if (userList.id === user.id) {
                 userList = user;
@@ -27,7 +30,5 @@ export default {
         })
         state.userList = updatedValue
     }),
-
-
 }
 
