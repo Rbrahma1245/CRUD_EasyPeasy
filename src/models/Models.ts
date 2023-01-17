@@ -1,34 +1,32 @@
 import { action } from "easy-peasy";
-import { Iuser } from "../screens/Homepage";
+import { User } from "../screens/Homepage";
 
-export interface IState {
-    userList: Iuser[];
+export interface State {
+  userList: User[];
 }
-
 
 export default {
-    userList: [],
+  userList: [],
 
+  // ACTIONS
 
-    // ACTIONS
+  addUser: action<State, User>((state, user) => {
+    state.userList.push(user);
+  }),
 
-    AddUser: action<IState, Iuser>((state, user) => {
-        state.userList.push(user);
-    }),
+  deleteUser: action<State, number>((state, userId) => {
+    state.userList = state.userList.filter(
+      (userItem: User) => userItem.id !== userId
+    );
+  }),
 
-    DeleteUser: action<IState, number>((state, userId) => {
-        state.userList = state.userList.filter((userItem: Iuser) => userItem.id !== userId)
-
-    }),
-
-    UpdateUser: action<IState, Iuser>((state, user) => {
-        let updatedValue = state.userList.map((userList: Iuser) => {
-            if (userList.id === user.id) {
-                userList = user;
-            }
-            return userList
-        })
-        state.userList = updatedValue
-    }),
-}
-
+  updateUser: action<State, User>((state, user) => {
+    const updatedValue = state.userList.map((userList: User) => {
+      if (userList.id === user.id) {
+        userList = user;
+      }
+      return userList;
+    });
+    state.userList = updatedValue;
+  }),
+};
