@@ -25,7 +25,6 @@ const Homepage: React.FC = () => {
     age: 0,
     gender: "",
   });
-
   const { addUser, deleteUser, updateUser } = useStoreActions(
     (actions: IActions) => actions
   );
@@ -35,22 +34,16 @@ const Homepage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // console.log();
+
     if (user.name === "" || user.age === 0 || user.gender === "") {
       alert("Please fill the details");
     } else if (user.id) {
       updateUser(user);
-      setUser({
-        name: "",
-        age: 0,
-        gender: "",
-      });
+      setUser({ name: "", age: 0, gender: "" });
     } else {
       addUser({ ...user, id: Date.now() });
-      setUser({
-        name: "",
-        age: 0,
-        gender: "",
-      });
+      setUser({ name: "", age: 0, gender: "" });
     }
   };
 
@@ -58,9 +51,9 @@ const Homepage: React.FC = () => {
     deleteUser(userId);
   };
 
-  const handleEdit = (id?: number) => {
+  const handleEdit = (userId?: number) => {
     const updateValue = userList.find((CurrElem: User) => {
-      return CurrElem.id === id;
+      return CurrElem.id === userId;
     });
     console.log(updateValue);
     if (updateValue) setUser(updateValue);

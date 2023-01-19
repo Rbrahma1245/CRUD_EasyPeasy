@@ -2,6 +2,7 @@ import React from "react";
 import { useStoreState } from "easy-peasy";
 import { User } from "../screens/Homepage";
 import { State } from "../models/Models";
+import { NavLink } from "react-router-dom";
 
 interface props {
   handleEdit: (id?: number) => void;
@@ -22,7 +23,7 @@ const UserList: React.FC<props> = ({ handleDelete, handleEdit }) => {
             key={user.id}
           >
             <div className=" py-2 px-4 mt-2">
-              Name : {user.name}
+              Name : <NavLink to={`/${user.id}`}>{user.name}</NavLink>
               <br />
               Age : {user.age}
               <br />
